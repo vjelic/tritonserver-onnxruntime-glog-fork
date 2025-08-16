@@ -1,0 +1,129 @@
+{
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Glog.AI",
+          "organization": "Glog.AI",
+          "fullName": "Glog, Making software more secure",
+          "version": "1.0.0",
+          "semanticVersion": "1.0.0",
+          "informationUri": "https://www.glog.ai",
+          "rules": [
+            {
+              "id": "glog-17b2fdc7-4208-459f-bff1-d7bf0966a352",
+              "help": {
+                "text": ""
+              },
+              "properties": {
+                "tags": [
+                  "DS140021"
+                ]
+              }
+            }
+          ],
+          "language": "en-US",
+          "contents": [
+            "localizedData",
+            "nonLocalizedData"
+          ],
+          "isComprehensive": false
+        }
+      },
+      "language": "en-US",
+      "results": [
+        {
+          "ruleId": "glog-17b2fdc7-4208-459f-bff1-d7bf0966a352",
+          "kind": "fail",
+          "level": "note",
+          "message": {},
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/onnxruntime_utils.cc"
+                },
+                "region": {
+                  "startLine": 374,
+                  "startColumn": 49,
+                  "endLine": 374,
+                  "endColumn": 64,
+                  "charOffset": 12544,
+                  "charLength": 15,
+                  "snippet": {
+                    "text": "strlen(\"TYPE_\")",
+                    "rendered": {
+                      "text": "strlen(\"TYPE_\")",
+                      "markdown": "`strlen(\"TYPE_\")`"
+                    }
+                  },
+                  "sourceLanguage": "cpp"
+                }
+              }
+            }
+          ],
+          "fixes": [
+            {
+              "description": {
+                "text": "If a string is missing a null terminator, strlen will read past the end of the buffer"
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "src/onnxruntime_utils.cc"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 12544,
+                        "charLength": 15
+                      },
+                      "insertedContent": {
+                        "text": "strlen_s(\"TYPE_\", <size of \"TYPE_\">)"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "description": {
+                "text": "If a string is missing a null terminator, strlen will read past the end of the buffer"
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "src/onnxruntime_utils.cc"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 12544,
+                        "charLength": 15
+                      },
+                      "insertedContent": {
+                        "text": "strnlen(\"TYPE_\", <size of \"TYPE_\">)"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "BestPractice",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.ProblematicFunction"
+            ]
+          }
+        }
+      ],
+      "newlineSequences": [
+        "\r\n",
+        "\n"
+      ]
+    }
+  ]
+}
